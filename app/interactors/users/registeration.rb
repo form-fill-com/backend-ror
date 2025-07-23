@@ -11,10 +11,4 @@ class Users::Registeration
       context.fail!(errors: user.errors)
     end
   end
-
-  private
-
-  def register
-    User.create
-  end
 end
