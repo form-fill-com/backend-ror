@@ -8,6 +8,13 @@ Rails.application.routes.draw do
         post :login
       end
     end
+
+    resources :forms do
+      member do
+        post :publish
+        get :share
+      end
+    end
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
