@@ -11,12 +11,13 @@ class Api::UsersController < ApplicationController
   end
 
   def register
-    user = User.create(user_params)
+    result = Users::Registeration.call(params: user_params)
 
-    if user.persisted?
-      render json: user
+    if result.success?
+      response.set_header('Authorization', "Bearer #{result.token}")
+      render json: result.user
     else
-      render json: { errors: user.errors }, status: :unprocessable_entity
+      render json: { errors: result.errors }, status: :unprocessable_entity
     end
   end
 
