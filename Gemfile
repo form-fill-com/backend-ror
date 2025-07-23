@@ -66,3 +66,5 @@ gem "devise", "~> 4.9"
 
 gem "devise-jwt", "~> 0.12.1"
 gem "dotenv-rails", "~> 3.1"
+
+gem "interactor", "~> 3.2"

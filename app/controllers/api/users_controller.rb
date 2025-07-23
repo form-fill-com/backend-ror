@@ -1,14 +1,12 @@
 class Api::UsersController < ApplicationController
   def login
-    user = User.find_by_email(params[:email])
+    result = Users::Login.call(**login_params)
 
-    if user&.valid_password?(params[:password])
-      token = JsonWebToken.encode(user_id: user.id)
-      response.set_header('Authorization', "Bearer #{token}")
-
-      render json: user
+    if result.success?
+      response.set_header('Authorization', "Bearer #{result.token}")
+      render json: result.user
     else
-      render json: { message: 'user not found' }, status: 404
+      render json: { error: result.error }, status: :unauthorized
     end
   end
 
@@ -23,6 +21,10 @@ class Api::UsersController < ApplicationController
   end
 
   private
+
+  def login_params
+    params.permit(:email, :password)
+  end
 
   def user_params
     params.permit(:first_name, :last_name, :email, :password)
