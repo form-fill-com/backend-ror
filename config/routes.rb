@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   namespace :api do
-    resources :users do
-      post :login, on: :collection
+    resources :users, only: [:index, :show, :update, :destroy] do
+      collection do
+        post :register
+        post :login
+      end
     end
   end
 
