@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_23_194218) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_26_182928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,6 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_23_194218) do
     t.jsonb "config", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type", null: false
     t.index ["form_id"], name: "index_form_fields_on_form_id"
   end
 
